@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odoo/presentation/router/app_router.dart';
-import 'package:odoo/presentation/screens/comfig.dart';
+import 'package:odoo/theme/comfig.dart';
 import 'package:odoo/theme/theme.dart';
 
 void main() {

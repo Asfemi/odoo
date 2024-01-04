@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odoo/presentation/widgets/OdooCard.dart';
 import 'package:odoo/presentation/widgets/background.dart';
 
 // class SplashPage extends StatefulWidget {
@@ -42,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _navigateToNextScreen() async {
-    await Future.delayed(const Duration(seconds: 8));
+    await Future.delayed(const Duration(seconds: 2));
     Navigator.pushNamed(context, '/home');
   }
 
@@ -57,19 +58,21 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'lib/assets/icons/d1_1 1 2.png', // Make sure to put your image in the assets folder
-                  width: 150.0,
-                  height: 150.0,
+                OdooCard(
+                  height: 192.0,
+                  width: 192.0,
+                  child: Image.asset(
+                    'lib/assets/icons/d1_1 1 2.png',
+                  ),
                 ),
                 const SizedBox(height: 16.0),
-                const Text(
+                Text(
                   'Odoo',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                const Text(
+                Text(
                   'Time management without obstacles',
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
             ),
