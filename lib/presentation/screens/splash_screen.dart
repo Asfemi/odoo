@@ -52,30 +52,27 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: BackgroundGradient(
         child: Center(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                OdooCard(
-                  height: 192.0,
-                  width: 192.0,
-                  child: Image.asset(
-                    'lib/assets/icons/d1_1 1 2.png',
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OdooCard(
+                radius: 32,
+                height: 192.0,
+                width: 192.0,
+                child: Image.asset(
+                  'lib/assets/icons/d1_1 1 2.png',
                 ),
-                const SizedBox(height: 16.0),
-                Text(
-                  'Odoo',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                Text(
-                  'Time management without obstacles',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16.0),
+              Text(
+                'Odoo',
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              Text(
+                'Time management without obstacles',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
           ),
         ),
       ),

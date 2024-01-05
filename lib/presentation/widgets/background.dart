@@ -9,6 +9,7 @@ class BackgroundGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       decoration: const BoxDecoration(
         gradient: kGradient,
       ),

@@ -11,9 +11,9 @@ class CustomTheme with ChangeNotifier {
   }
 
   static final ColorScheme _appColorScheme = ColorScheme.fromSeed(
-    seedColor: Colors.orange,
+    seedColor: Colors.white,
     brightness: Brightness.dark,
-    primary: Colors.orange,
+    primary: Colors.white,
     onPrimary: Colors.white,
     background: Colors.transparent,
     onBackground: Colors.white,
@@ -42,6 +42,7 @@ class CustomTheme with ChangeNotifier {
         scaffoldBackgroundColor: _appColorScheme.background,
         colorScheme: _appColorScheme,
         fontFamily: 'Montserrat',
+        dividerColor: Colors.white54,
         appBarTheme: AppBarTheme(
           backgroundColor: _appColorScheme.primary,
           iconTheme: const IconThemeData(color: Colors.white),
