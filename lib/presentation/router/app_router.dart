@@ -17,7 +17,7 @@ class AppRouter {
         );
         case '/TaskDetails':
         return MaterialPageRoute(
-          builder: (_) =>  const TaskDetailsScreen(),
+          builder: (_) =>  const TaskDetailsScreen(index: 1,),
         );
       case '/CreateTimer':
         return MaterialPageRoute(
