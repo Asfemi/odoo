@@ -93,7 +93,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                     children: [
                       ListTile(
                           title: Text(
-                            'Recent',
+                            'Delete',
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           leading: const ImageIcon(
@@ -167,107 +167,217 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
         body: TabBarView(
           controller: _tabController,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                OdooCard(
-                    height: size.height * 0.3,
-                    width: size.width,
+            SizedBox(
+              height: size.height * 0.8,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    OdooCard(
+                        height: size.height * 0.3,
+                        width: size.width,
+                        radius: 16,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _content[widget.index].taskdetails.day,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              Text(
+                                _content[widget.index].taskdetails.date,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                _content[widget.index].taskdetails.startTime,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    _content[widget.index].taskdetails.duration,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  const Spacer(),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Image.asset(
+                                      'lib/assets/icons/Frame 301.png',
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Image.asset(
+                                      'lib/assets/icons/Frame 299.png',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              Divider(
+                                height: 0.5,
+                                thickness: 0.5,
+                                color: Theme.of(context).dividerColor,
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Description',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Image.asset(
+                                      'lib/assets/icons/Frame 299b.png',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                _content[widget.index].taskdetails.description,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                'Read More',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        )),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Completed Records',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 5),
+                    SizedBox(
+                      height: size.height * 0.45,
+                      child: ListView.builder(
+                          itemCount: _completedcontent.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isExpanded = !isExpanded;
+                                });
+                              },
+                              child: ExpandableCardContainer(
+                                expandedChild:
+                                    createExpandedColumn(context, index),
+                                collapsedChild:
+                                    createCollapsedColumn(context, index),
+                                isExpanded: isExpanded,
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.8,
+              child: Column(
+                children: [
+                  OdooCard(
+                    height: 196,
+                    width: 361,
                     radius: 16,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _content[widget.index].taskdetails.day,
+                            'Description',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 24,
+                                child: VerticalDivider(
+                                  color: Color(0xffFFC629),
+                                  width: 10,
+                                  thickness: 2,
+                                  indent: 2,
+                                  endIndent: 2,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                _content[widget.index].taskdetails.project,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
                           Text(
-                            _content[widget.index].taskdetails.date,
+                            'Deadline',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _content[widget.index].taskdetails.deadline,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
+                          const SizedBox(height: 16),
                           Text(
-                            _content[widget.index].taskdetails.startTime,
+                            'Assigned to',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                _content[widget.index].taskdetails.duration,
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                              const Spacer(),
-                              InkWell(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'lib/assets/icons/Frame 301.png',
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              InkWell(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'lib/assets/icons/Frame 299.png',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Divider(
-                            height: 0.5,
-                            thickness: 0.5,
-                            color: Theme.of(context).dividerColor,
-                          ),
-                          const SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Description',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'lib/assets/icons/Frame 299b.png',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 5),
+                          const SizedBox(height: 8),
                           Text(
-                            _content[widget.index].taskdetails.description,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            'Read More',
-                            style: Theme.of(context).textTheme.bodySmall,
+                            _content[widget.index].taskdetails.assignedTo,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
                       ),
-                    )),
-                const SizedBox(height: 10),
-                Text(
-                  'Completed Records',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 5),
-                ListView.builder(itemBuilder: (context, index) {
-                  return ExpandableCardContainer(
-                    expandedChild: createExpandedColumn(context, index),
-                    collapsedChild: createCollapsedColumn(context, index),
-                    isExpanded: isExpanded,
-                  );
-                }),
-              ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  OdooCard(
+                    height: 136,
+                    width: 361,
+                    radius: 16,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Description',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _content[widget.index].taskdetails.description,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const Column(),
           ],
         ),
       ),
@@ -285,9 +395,10 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
+              width: 26,
+              height: 26,
               'lib/assets/icons/Frame 26.png',
             ),
-            
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -306,12 +417,70 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
               ],
             ),
             const Spacer(),
-             
           ],
         ),
       ),
     );
   }
 
-  createExpandedColumn(BuildContext context, int index) {}
+  createExpandedColumn(BuildContext context, int index) {
+    return OdooCard(
+        height: 229,
+        width: 361,
+        radius: 16,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _completedcontent[index].day,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Text(
+                _completedcontent[index].date,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                _completedcontent[index].startTime,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 20),
+              Divider(
+                height: 0.5,
+                thickness: 0.5,
+                color: Theme.of(context).dividerColor,
+              ),
+              const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Description',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      'lib/assets/icons/Frame 299b.png',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                _completedcontent[index].description,
+                style: Theme.of(context).textTheme.bodyMedium,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                'Read More',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ));
+  }
 }
