@@ -86,7 +86,7 @@ class Timers extends StatelessWidget {
               )
             ],
           ),
-          // const SizedBox(height: 6),
+          
           Row(
             children: [
               Image.asset('lib/assets/icons/3.png'),
@@ -97,7 +97,7 @@ class Timers extends StatelessWidget {
               )
             ],
           ),
-          // const SizedBox(height: 10),
+          
           Row(
             children: [
               Image.asset('lib/assets/icons/4.png'),
