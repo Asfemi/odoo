@@ -16,6 +16,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     on<TimerResumed>(_onResumed);
     on<TimerReset>(_onReset);
     on<_TimerTicked>(_onTicked);
+    on<ProjectEvent>(_onProject);
+    on<TaskEvent>(_onTask);
   }
 
   final Ticker _ticker;
@@ -27,6 +29,14 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   Future<void> close() {
     _tickerSubscription?.cancel();
     return super.close();
+  }
+
+  void _onProject(ProjectEvent event, Emitter<TimerState> emit) {
+    emit(ProjectState(selectedProject: event.selectedProject));
+  }
+
+  void _onTask(TaskEvent event, Emitter<TimerState> emit) {
+    emit(TaskState(selectedTask: event.selectedTask));
   }
 
   void _onStarted(TimerStarted event, Emitter<TimerState> emit) {

@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:odoo/data/dataproviders/helper.dart';
 import 'package:odoo/data/models/timer_model.dart';
+import 'package:odoo/logic/bloc/timer_bloc.dart';
 import 'package:odoo/presentation/screens/task_details_screen.dart';
 import 'package:odoo/presentation/widgets/OdooCard.dart';
 import 'package:odoo/presentation/widgets/playPause_button.dart';
+import 'package:odoo/ticker.dart';
 
-class Timers extends StatelessWidget {
+class Timers extends StatefulWidget {
   const Timers({super.key});
+
+  @override
+  State<Timers> createState() => _TimersState();
+}
+
+class _TimersState extends State<Timers> {
+  final List<bool> timerPlayPauseList = List.generate(16, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +38,38 @@ class Timers extends StatelessWidget {
         onTap: () {
           _navigateToTaskDetails(context, index);
         },
-        child: OdooCard(
-            height: 136,
-            width: 361,
-            radius: 16,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 10.0,
-              ),
-              child: Row(children: [
-                SizedBox(
-                  height: 114,
-                  child: _buildVerticalDivider(),
+        child: BlocProvider(
+          create: (context) => TimerBloc(ticker: Ticker()),
+          child: OdooCard(
+              height: 136,
+              width: 361,
+              radius: 16,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 10.0,
                 ),
-                const SizedBox(width: 5),
-                _buildTimerItemContent(_content, index, context),
-                const Spacer(),
-                playPauseButton(index, context)
-              ]),
-            )),
+                child: Row(children: [
+                  SizedBox(
+                    height: 114,
+                    child: _buildVerticalDivider(),
+                  ),
+                  const SizedBox(width: 5),
+                  _buildTimerItemContent(_content, index, context),
+                  const Spacer(),
+                  playPauseButton(
+                    index,
+                    context,
+                    timerPlayPauseList[index],
+                    (bool isPlaying) {
+                      setState(() {
+                        timerPlayPauseList[index] = isPlaying;
+                      });
+                    },
+                  )
+                ]),
+              )),
+        ),
       ),
     );
   }
@@ -86,7 +108,6 @@ class Timers extends StatelessWidget {
               )
             ],
           ),
-          
           Row(
             children: [
               Image.asset('lib/assets/icons/3.png'),
@@ -97,7 +118,6 @@ class Timers extends StatelessWidget {
               )
             ],
           ),
-          
           Row(
             children: [
               Image.asset('lib/assets/icons/4.png'),

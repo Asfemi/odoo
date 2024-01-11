@@ -21,26 +21,13 @@ class OdooCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
       child: Container(
-        // padding: const EdgeInsets.all(10.0),
-        child: Stack(
-          children: [
-            BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 5,
-                sigmaY: 5,
-              ),
-              child: Container(
-                width: width,
-                height: height,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(radius),
-                  color: Colors.white.withOpacity(0.1),
-                ),
-              ),
-            ),
-            child,
-          ],
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius),
+          color: Colors.white.withOpacity(0.07999999821186066),
         ),
+        child: child,
       ),
     );
   }

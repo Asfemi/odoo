@@ -1,58 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:odoo/presentation/widgets/OdooCard.dart';
+import 'package:odoo/presentation/widgets/TimeSheetActions.dart';
 import 'package:odoo/presentation/widgets/TimerText.dart';
 
-Widget playPauseButton(index, context) {
-  if (index == 1) {
+Widget playPauseButton(index, context, bool isPlaying, Function(bool) onToggle) {
     return OutlinedButton(
-        onPressed: () {},
+        onPressed: () {
+         onToggle(!isPlaying);
+        },
         style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(10),
             fixedSize: const Size(104, 48),
-            backgroundColor: Colors.white,
+            side: const BorderSide(
+              color: Colors.transparent,
+            ),
+            backgroundColor: isPlaying
+            ? Colors.white
+            : Colors.white.withOpacity(0.07999999821186066),
             shape: const StadiumBorder()),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TimerText(
               style: TextStyle(
-                color: Theme.of(context).primaryColorLight,
+                color: isPlaying
+                  ? Theme.of(context).primaryColorDark
+                  : Theme.of(context).indicatorColor,
                 fontSize: 14,
               ),
             ),
             const SizedBox(width: 5),
-            InkWell(
-              child: Image.asset(
-                'lib/assets/icons/Frame 2.png',
-                height: 32,
-                width: 32,
-              ),
-            ),
+             TImeSheetActions(light: isPlaying, onToggle: (bool ) {onToggle(!isPlaying);  }, ),
           ],
         ));
-  } else {
-    return OdooCard(
-      height: 48,
-      width: 100,
-      radius: 32,
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TimerText(style: Theme.of(context).textTheme.labelLarge),
-            const SizedBox(width: 5),
-            InkWell( 
-              child: Image.asset(
-                'lib/assets/icons/Frame 2 light.png',
-                height: 32,
-                width: 32,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  
 }
-
