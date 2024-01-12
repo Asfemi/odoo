@@ -8,6 +8,27 @@ sealed class TimerState extends Equatable {
   List<Object> get props => [duration];
 }
 
+// New state for loading timers
+final class TimerLoading extends TimerState {
+  const TimerLoading() : super(0);
+
+  @override
+  String toString() => 'TimerLoading';
+}
+
+// New state for error
+final class TimerError extends TimerState {
+  final String error;
+
+  const TimerError({required this.error}) : super(0);
+
+  @override
+  List<Object> get props => [error];
+
+  @override
+  String toString() => 'TimerError { error: $error }';
+}
+
 final class TimerInitial extends TimerState {
   const TimerInitial(super.duration);
 
@@ -29,17 +50,19 @@ final class TimerRunInProgress extends TimerState {
   String toString() => 'TimerRunInProgress { duration: $duration }';
 }
 
+
+
 final class TimerRunComplete extends TimerState {
   const TimerRunComplete() : super(0);
 }
 
 class ProjectState extends TimerState {
-  String? selectedProject;
+  final String? selectedProject;
 
-  ProjectState({this.selectedProject}) : super(0);
+  const ProjectState({this.selectedProject}) : super(0);
 }
 class TaskState extends TimerState {
-  String? selectedTask;
+  final String? selectedTask;
 
-  TaskState( {this.selectedTask}) : super(0);
+  const TaskState( {this.selectedTask}) : super(0);
 }

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:odoo/data/dataproviders/helper.dart';
+import 'package:odoo/data/models/timer_model.dart';
 import 'package:odoo/ticker.dart';
 
 part 'timer_event.dart';
@@ -39,7 +41,9 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     emit(TaskState(selectedTask: event.selectedTask));
   }
 
-  void _onStarted(TimerStarted event, Emitter<TimerState> emit) {
+  void _onStarted(TimerStarted event, Emitter<TimerState> emit) async{
+    
+    
     emit(TimerRunInProgress(event.duration));
     _tickerSubscription?.cancel();
     _tickerSubscription = _ticker

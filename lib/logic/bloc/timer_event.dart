@@ -4,6 +4,19 @@ sealed class TimerEvent {
   const TimerEvent();
 }
 
+final class TimerLoaded extends TimerState {
+  final List<TimersData> content;
+
+  const TimerLoaded(this.content, int duration) : super(duration);
+
+  @override
+  List<Object> get props => [content, duration];
+
+  @override
+  String toString() => 'TimerLoaded { content: $content, duration: $duration }';
+}
+
+
 final class TimerStarted extends TimerEvent {
   const TimerStarted({required this.duration});
   final int duration;
