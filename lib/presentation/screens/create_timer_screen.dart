@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:odoo/data/dataproviders/helper.dart';
+import 'package:odoo/data/models/task_models.dart';
+import 'package:odoo/data/models/timer_model.dart';
+import 'package:odoo/logic/bloc/timer_bloc.dart';
 import 'package:odoo/presentation/widgets/background.dart';
+import 'package:odoo/ticker.dart';
 
 class CreateTimer extends StatefulWidget {
   const CreateTimer({super.key});
@@ -19,6 +24,7 @@ class _CreateTimerState extends State<CreateTimer> {
   ];
   List<String> tasks = ["Riverpod", "Getx", "rxDart", "SO056 - Booqio V2"];
   String timerDescription = '';
+  TimerBloc createTimerBloc = TimerBloc(ticker: const Ticker());
   bool? isFavorite;
 
   @override
@@ -141,6 +147,33 @@ class _CreateTimerState extends State<CreateTimer> {
           const Spacer(),
           InkWell(
             onTap: () {
+              if (selectedProject!.isNotEmpty &&
+                  selectedTask!.isNotEmpty &&
+                  timerDescription.isNotEmpty) {
+                TimersData newData = TimersData(
+                  name: selectedProject.toString(),
+                  details: selectedTask.toString(),
+                  deadline: '12/01/2024',
+                  isFav: isFavorite,
+                  taskdetails: TaskData(
+                    date: '01.01.2024',
+                    day: 'Monday',
+                    description: timerDescription.toString(),
+                    duration: '00:01:00',
+                    startTime: '12:00',
+                    assignedTo: 'New Assignee',
+                    deadline: '01/01/2025',
+                    project: 'New Project',
+                  ),
+                );
+                Helper.addTimersData(newData);
+              } else {
+                // Show a snackbar or any other validation message
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Please fill in all fields.'),
+                ));
+              }
+
               Navigator.pop(context);
             },
             child: Ink.image(

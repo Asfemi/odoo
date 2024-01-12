@@ -101,7 +101,7 @@ class _TimersState extends State<Timers> {
               SizedBox(
                 width: 180,
                 child: Text(
-                  _content[index].name,
+                  _content[index].name.toString(),
                   maxLines: 2,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),

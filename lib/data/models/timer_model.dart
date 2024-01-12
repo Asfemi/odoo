@@ -6,9 +6,36 @@ class TimersData {
     required this.deadline,
     required this.details,
     required this.taskdetails,
+    this.isFav,
+    this.createdAt,
   });
-  final String name;
-  final String deadline;
-  final String details;
-  final TaskData taskdetails;
+  String name;
+  String deadline;
+  String details;
+  bool? isFav;
+  DateTime? createdAt;
+  TaskData taskdetails;
+
+  factory TimersData.fromJSON(Map<String, dynamic> json) {
+    return TimersData(
+      name: json['name'],
+      deadline: json['deadline'],
+      details: json['details'],
+      isFav: json['isFav'],
+      taskdetails: json['taskdetails'],
+      createdAt:
+          json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    );
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'name': name,
+      'deadline': deadline,
+      'details': details,
+      'taskdetails': taskdetails,
+      'isFav': isFav,
+      'createdAt': createdAt?.toIso8601String(),
+    };
+  }
 }

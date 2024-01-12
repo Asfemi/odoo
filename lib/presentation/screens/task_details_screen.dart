@@ -9,6 +9,7 @@ import 'package:odoo/presentation/widgets/OdooCard.dart';
 import 'package:odoo/presentation/widgets/background.dart';
 import 'package:odoo/presentation/widgets/modalBottomsheetContent.dart';
 
+
 class TaskDetailsScreen extends StatefulWidget {
   const TaskDetailsScreen({required this.index, super.key});
 
@@ -22,6 +23,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   List<bool> isExpandedList = [];
+  
   bool isExpanded = false;
 
   final List<TimersData> _content = Helper.getTimersData();
