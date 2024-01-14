@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 const kGradient = LinearGradient(
@@ -7,3 +5,5 @@ const kGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
 );
+
+const String apiEndpoint = 'rada rada radaa: from chowder!';

@@ -38,4 +38,6 @@ class TimersData {
       'createdAt': createdAt?.toIso8601String(),
     };
   }
+
+  map(TimersData Function(dynamic json) param0) {}
 }
