@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:odoo/constants/constants.dart';
 import 'package:odoo/data/models/timer_model.dart';
@@ -11,10 +13,15 @@ class ApiClient {
       if (response.statusCode == 200) {
         return TimersData.fromJSON(response.data);
       } else {
-        throw Exception('Failed to load data');
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          error: 'Failed to load data',
+        );
       }
     } catch (error) {
-      throw Exception('Error: $error');
+      log('Dio error: $error');
+      throw Exception('Failed to fetch timers data');
     }
   }
 }

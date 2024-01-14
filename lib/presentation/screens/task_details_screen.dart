@@ -25,6 +25,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
   List<bool> isExpandedList = [];
   
   bool isExpanded = false;
+  
 
   final List<TimersData> _content = Helper.getTimersData();
   final List<TaskData> _completedcontent = Helper.getTaskData();
@@ -45,6 +46,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    
     return BackgroundGradient(
       child: Scaffold(
         appBar: taskDetailsAppBar(context, size),
