@@ -1,8 +1,9 @@
-import 'dart:developer';
+
 
 import 'package:dio/dio.dart';
 import 'package:odoo/constants/constants.dart';
 import 'package:odoo/data/models/timer_model.dart';
+
 
 class ApiClient {
   final Dio _dio = Dio();
@@ -20,8 +21,9 @@ class ApiClient {
         );
       }
     } catch (error) {
-      log('Dio error: $error');
-      throw Exception('Failed to fetch timers data');
+      
+      rethrow;
     }
   }
 }
+

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:odoo/logic/bloc/timer_bloc.dart';
@@ -7,9 +10,17 @@ import 'package:odoo/theme/theme.dart';
 import 'package:odoo/ticker.dart';
 
 void main() {
-  runApp(MyApp(
-    appRouter: AppRouter(),
-  ));
+ FlutterError.onError = (FlutterErrorDetails details) {
+    
+    log('Global Flutter error: ${details.exception}');
+  };
+
+  runZonedGuarded(() {
+    runApp(MyApp(appRouter: AppRouter(),));
+  }, (Object error, StackTrace stackTrace) {
+   
+    log('Uncaught error: $error');
+  });
 }
 
 class MyApp extends StatelessWidget {
