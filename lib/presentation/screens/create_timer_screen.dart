@@ -109,7 +109,7 @@ class _CreateTimerState extends State<CreateTimer> {
         dropdownColor: Colors.blue,
         hint: Text(
           hint,
-          style: const TextStyle(fontSize: 18),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18),
         ),
         decoration: InputDecoration(
           border: OutlineInputBorder(

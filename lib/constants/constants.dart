@@ -7,3 +7,6 @@ const kGradient = LinearGradient(
 );
 
 const String apiEndpoint = 'rada rada radaa: from chowder!';
+
+const Color kLightTextColor = Colors.white;
+const Color kDarkTextColor = Colors.black;

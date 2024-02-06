@@ -55,14 +55,3 @@ final class TimerRunInProgress extends TimerState {
 final class TimerRunComplete extends TimerState {
   const TimerRunComplete() : super(0);
 }
-
-class ProjectState extends TimerState {
-  final String? selectedProject;
-
-  const ProjectState({this.selectedProject}) : super(0);
-}
-class TaskState extends TimerState {
-  final String? selectedTask;
-
-  const TaskState( {this.selectedTask}) : super(0);
-}

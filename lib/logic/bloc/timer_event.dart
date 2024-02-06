@@ -38,15 +38,3 @@ class _TimerTicked extends TimerEvent {
   const _TimerTicked({required this.duration});
   final int duration;
 }
-
-class ProjectEvent extends TimerEvent {
-  String? selectedProject;
-
-  ProjectEvent({this.selectedProject});
-}
-
-class TaskEvent extends TimerEvent {
-  String? selectedTask;
-
-  TaskEvent({this.selectedTask});
-}

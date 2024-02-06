@@ -36,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen>
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [const Color(0xff214ECC), const Color(0xff214ECC).withOpacity(0.7)],
+              colors: [
+                const Color(0xff214ECC),
+                const Color(0xff214ECC).withOpacity(0.7)
+              ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -174,17 +177,11 @@ class _HomeScreenState extends State<HomeScreen>
       body: TabBarView(
         controller: _tabController,
         children: const [
-          EmptyData(
-            index: 0,
-          ),
+          EmptyData(index: 0),
           Timers(),
-          EmptyData(
-            index: 2,
-          ),
+          EmptyData(index: 2),
         ],
       ),
     );
   }
-
-  
 }
